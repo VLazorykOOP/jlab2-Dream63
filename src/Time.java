@@ -50,7 +50,7 @@ public class Time {
         short secondsR = (short)(seconds % 60);
         return new Time(hoursR, minutesR, secondsR);
     }
-    public Time DifferenceBetweenTimes(Time FirstEvent, Time SecondEvent) {
+    public static Time DifferenceBetweenTimes(Time FirstEvent, Time SecondEvent) {
         Time Difference = new Time();
         Difference.seconds = (short)((SecondEvent.seconds + 60 - FirstEvent.seconds) % 60);
         if (Difference.seconds < 60) 
@@ -69,5 +69,19 @@ public class Time {
     public Time RemoveSecondsFromTime(int seconds) {
         return ToTime(ToSeconds(this) - seconds);
     }
-    
+    public String getString() {
+        return hours + "h " + minutes + "m " + seconds +"s";
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        Time time1 = new Time((short)13, (short)5, (short)12), time2 = new Time(18233);
+        System.out.println("Time1: " + time1.getString() + " Time2:" + time2.getString());     
+
+        System.out.println("Addition: " + time1.AddSecondsToTime(10).getString());       
+        
+        Time time3 = Time.DifferenceBetweenTimes(time1, time2);
+        System.out.println("Difference: "+ time3.getString());
+    }
 }
