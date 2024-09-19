@@ -52,13 +52,16 @@ public class Time {
     }
     public static Time DifferenceBetweenTimes(Time FirstEvent, Time SecondEvent) {
         Time Difference = new Time();
-        Difference.seconds = (short)((SecondEvent.seconds + 60 - FirstEvent.seconds) % 60);
+        Difference.seconds = (short)((SecondEvent.seconds + 60 - FirstEvent.seconds));
         if (Difference.seconds < 60) 
             FirstEvent.minutes--;
+        Difference.seconds %= 60;
 
-        Difference.minutes = (short)((SecondEvent.minutes + 60 - FirstEvent.minutes) % 60);
+        Difference.minutes = (short)((SecondEvent.minutes + 60 - FirstEvent.minutes));
         if (Difference.minutes < 60) 
             FirstEvent.hours--;
+        Difference.minutes %= 60;
+        
         Difference.hours = (short)((SecondEvent.hours + 24 - FirstEvent.hours) % 24);
 
         return Difference;
